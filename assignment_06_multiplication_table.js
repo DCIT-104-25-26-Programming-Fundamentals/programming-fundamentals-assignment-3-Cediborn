@@ -59,4 +59,81 @@
 // YOUR CODE BELOW — remove the // symbols from the scaffold and fill it in
 // =============================================================================
 
+const readline = require('readline-sync');
 
+// =============================================================================
+// PART A — Single Table
+// =============================================================================
+
+/**
+ * Prints the multiplication table for a single number from 1 to 12.
+ * @param {number} num - The base number for the table.
+ */
+function printSingleTable(num) {
+    if (isNaN(num) || !Number.isInteger(num) || num <= 0) {
+        console.log('Error: Please enter a valid positive integer.');
+        return;
+    }
+
+    console.log(`\nMultiplication Table for ${num}:`);
+    for (let i = 1; i <= 12; i++) {
+        const product = num * i;
+        // Pad numbers for clean visual alignment
+        const multiplier = String(i).padStart(2, ' ');
+        const result = String(product).padStart(3, ' ');
+        console.log(`${num}  x  ${multiplier}  =  ${result}`);
+    }
+}
+
+// =============================================================================
+// PART B — Bonus: Tables from 1 to N
+// =============================================================================
+
+/**
+ * Prints the multiplication tables for all numbers from 1 up to N.
+ * @param {number} n - The upper limit number.
+ */
+function printTablesUpToN(n) {
+    if (isNaN(n) || !Number.isInteger(n) || n <= 0) {
+        console.log('Error: Please enter a valid positive integer.');
+        return;
+    }
+
+    for (let current = 1; current <= n; current++) {
+        printSingleTable(current);
+
+        // Print separator between tables, but not after the last table
+        if (current < n) {
+            console.log('---------------------------');
+        }
+    }
+}
+
+// =============================================================================
+// MAIN PROGRAM EXECUTION
+// =============================================================================
+
+function main() {
+    console.log('=== MULTIPLICATION TABLE GENERATOR ===\n');
+
+    // -------------------------------------------------------------------------
+    // Part A: Single Table
+    // -------------------------------------------------------------------------
+    console.log('--- PART A: Single Table ---');
+    const singleInput = readline.question('Enter a number: ');
+    const num = parseInt(singleInput, 10);
+
+    printSingleTable(num);
+
+    // -------------------------------------------------------------------------
+    // Part B: Tables from 1 to N
+    // -------------------------------------------------------------------------
+    console.log('\n--- PART B: Tables from 1 to N ---');
+    const limitInput = readline.question('Enter N: ');
+    const n = parseInt(limitInput, 10);
+
+    printTablesUpToN(n);
+}
+
+// Run the application
+main();
