@@ -49,4 +49,48 @@
 // YOUR CODE BELOW — remove the // symbols from the scaffold and fill it in
 // =============================================================================
 
+const readline = require('readline-sync');
 
+/**
+ * Determines the letter grade based on a numeric score.
+ * * @param {number} score - The student's numerical score.
+ * @returns {string|null} - The letter grade ('A', 'B', 'C', 'D', 'F') or null if invalid.
+ */
+function getGrade(score) {
+    // Validate score range
+    if (score < 0 || score > 100 || isNaN(score)) {
+        return null;
+    }
+
+    // Determine letter grade
+    if (score >= 80) {
+        return 'A';
+    } else if (score >= 70) {
+        return 'B';
+    } else if (score >= 60) {
+        return 'C';
+    } else if (score >= 50) {
+        return 'D';
+    } else {
+        return 'F';
+    }
+}
+
+/**
+ * Main function to execute the program.
+ */
+function main() {
+    const input = readline.question('Enter student score (0-100): ');
+    const score = parseFloat(input);
+
+    const grade = getGrade(score);
+
+    if (grade === null) {
+        console.log('Error: Score must be between 0 and 100.');
+    } else {
+        console.log(`Grade: ${grade}`);
+    }
+}
+
+// Run the application
+main();
