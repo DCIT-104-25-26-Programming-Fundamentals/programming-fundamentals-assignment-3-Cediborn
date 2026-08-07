@@ -43,4 +43,102 @@
 // YOUR CODE BELOW — remove the // symbols from the scaffold and fill it in
 // =============================================================================
 
+const readline = require('readline-sync');
 
+/**
+ * Calculates the sum of all numbers in an array.
+ * @param {number[]} arr - Array of numbers.
+ * @returns {number} The sum of elements.
+ */
+function calculateSum(arr) {
+    let sum = 0;
+    for (let i = 0; i < arr.length; i++) {
+        sum += arr[i];
+    }
+    return sum;
+}
+
+/**
+ * Calculates the average of an array of numbers.
+ * @param {number[]} arr - Array of numbers.
+ * @returns {number} The average value.
+ */
+function calculateAverage(arr) {
+    const sum = calculateSum(arr);
+    return sum / arr.length;
+}
+
+/**
+ * Finds the maximum number in an array.
+ * @param {number[]} arr - Array of numbers.
+ * @returns {number} The maximum value.
+ */
+function findMax(arr) {
+    let max = arr[0];
+    for (let i = 1; i < arr.length; i++) {
+        if (arr[i] > max) {
+            max = arr[i];
+        }
+    }
+    return max;
+}
+
+/**
+ * Finds the minimum number in an array.
+ * @param {number[]} arr - Array of numbers.
+ * @returns {number} The minimum value.
+ */
+function findMin(arr) {
+    let min = arr[0];
+    for (let i = 1; i < arr.length; i++) {
+        if (arr[i] < min) {
+            min = arr[i];
+        }
+    }
+    return min;
+}
+
+/**
+ * Main function to execute the program.
+ */
+function main() {
+    const countInput = readline.question('How many numbers? ');
+    const count = parseInt(countInput, 10);
+
+    // Validate input count
+    if (isNaN(count) || count <= 0) {
+        console.log('Error: Please enter a positive integer greater than 0.');
+        return;
+    }
+
+    const numbers = [];
+
+    // Collect numbers from user
+    for (let i = 0; i < count; i++) {
+        const numInput = readline.question(`Enter number ${i + 1}: `);
+        const num = parseFloat(numInput);
+
+        if (isNaN(num)) {
+            console.log('Error: Invalid number input.');
+            return;
+        }
+
+        numbers.push(num);
+    }
+
+    // Compute statistics using functions
+    const sum = calculateSum(numbers);
+    const average = calculateAverage(numbers);
+    const max = findMax(numbers);
+    const min = findMin(numbers);
+
+    // Display results
+    console.log('\nResults:');
+    console.log(`Sum:     ${sum}`);
+    console.log(`Average: ${average}`);
+    console.log(`Maximum: ${max}`);
+    console.log(`Minimum: ${min}`);
+}
+
+// Run the application
+main();
