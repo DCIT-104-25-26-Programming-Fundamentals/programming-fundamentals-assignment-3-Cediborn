@@ -81,4 +81,93 @@
 // YOUR CODE BELOW — remove the // symbols from the scaffold and fill it in
 // =============================================================================
 
+const readline = require('readline-sync');
+
+// Global array to store tasks
+const tasks = [];
+
+/**
+ * Displays the main menu options to the user.
+ */
+function showMenu() {
+    console.log('\n============================');
+    console.log('       TO-DO LIST MENU');
+    console.log('============================');
+    console.log('1. Add task');
+    console.log('2. View tasks');
+    console.log('3. Delete task');
+    console.log('4. Quit');
+}
+
+/**
+ * Prompts the user for a task description and adds it to the list.
+ */
+function addTask() {
+    const taskDescription = readline.question('\nEnter task: ').trim();
+
+    if (taskDescription === '') {
+        console.log('Error: Task description cannot be empty.');
+        return;
+    }
+
+    tasks.push(taskDescription);
+    console.log(`Task added: "${taskDescription}"`);
+}
+
+/**
+ * Displays all tasks currently stored in the list.
+ */
+function viewTasks() {
+    console.log('\nYour Tasks:');
+
+    if (tasks.length === 0) {
+        console.log('No tasks in your list yet!');
+        return;
+    }
+
+    for (let i = 0; i < tasks.length; i++) {
+        console.log(`${i + 1}. ${tasks[i]}`);
+    }
+}
+
+/**
+ * Displays tasks and prompts the user to delete a task by its line number.
+ */
+function deleteTask() {
+    if (tasks.length === 0) {
+        console.log('\nNo tasks available to delete.');
+        return;
+    }
+
+    viewTasks();
+
+    const input = readline.question('\nEnter task number to delete: ');
+    const taskNumber = parseInt(input, 10);
+
+    // Validate 1-based task index
+    if (isNaN(taskNumber) || taskNumber < 1 || taskNumber > tasks.length) {
+        console.log('Error: Invalid task number.');
+        return;
+    }
+
+    // Convert 1-based input to 0-based index
+    const indexToRemove = taskNumber - 1;
+    const removedTask = tasks.splice(indexToRemove, 1)[0];
+
+    console.log(`Task "${removedTask}" has been removed.`);
+}
+
+/**
+ * Main application loop controlling the menu system.
+ */
+function main() {
+    let running = true;
+
+    while (running) {
+        showMenu();
+        const choice = readline.question('Enter your choice (1-4): ').trim();
+
+        switch (choice) {
+            case '1':
+                addTask
 
